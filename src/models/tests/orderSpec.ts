@@ -81,7 +81,6 @@ describe("Order Endpoints", () => {
     const response = await request(app)
       .get(`/orders/users/${activeCart.user_id}`)
       .set("accessToken", accessToken);
-    console.log(response.body);
     expect(response.status).toBe(200);
     expect(response.body.orders.length).toBeGreaterThan(0);
   });
