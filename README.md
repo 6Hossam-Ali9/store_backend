@@ -20,7 +20,7 @@ Welcome to the Storefront Backend Project! This project is a robust backend for 
 - User: { id, first_name "this should be unique as it's used as a username in loging in", last_name, password }
 - Product: { id, name, price, category }
 - Order: { id, status, user_id "as a foreign key from User model" } this model act as a cart
-- Order_products: { id, product_id "as a foreign key from Product model", order_id ""as a foreign key from Order model"}
+- Order_products: { id, product_id "as a foreign key from Product model", order_id "as a foreign key from Order model"}
 
 ### Routes and Functionality
 
@@ -174,7 +174,7 @@ ENV=dev
 
 3. ```npm run watch```: This command will watch your application while trying, so changes can have an immediate reflection on the application
 
-4. ```npm run test```: This command is actually consist of 5 parts:
+4. ```npm run test```: This command is actually consists of 5 parts:
     1. ```db-migrate db:create storetest```: creating a testing db called `storetest`
     2. ```set ENV=test```: changing the environment variable to `test` instead of `dev`
     3. ```db-migrate --env test up```: running the db migrations on the testing database
