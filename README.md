@@ -20,7 +20,7 @@ Welcome to the Storefront Backend Project! This project is a robust backend for 
 - User: { id, first_name "this should be unique as it's used as a username in loging in", last_name, password }
 - Product: { id, name, price, category }
 - Order: { id, status, user_id "as a foreign key from User model" } this model act as a cart
-- Order_products: { id, product_id "as a foreign key from Product model", order_id ""as a foreign key from Order model"}
+- Order_products: { id, product_id "as a foreign key from Product model", order_id "as a foreign key from Order model"}
 
 ### Routes and Functionality
 
