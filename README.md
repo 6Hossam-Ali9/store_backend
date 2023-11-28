@@ -174,7 +174,7 @@ ENV=dev
 
 3. ```npm run watch```: This command will watch your application while trying, so changes can have an immediate reflection on the application
 
-4. ```npm run test```: This command is actually consist of 5 parts:
+4. ```npm run test```: This command is actually consists of 5 parts:
     1. ```db-migrate db:create storetest```: creating a testing db called `storetest`
     2. ```set ENV=test```: changing the environment variable to `test` instead of `dev`
     3. ```db-migrate --env test up```: running the db migrations on the testing database
