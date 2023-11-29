@@ -175,10 +175,11 @@ ENV=dev
 3. ```npm run watch```: This command will watch your application while trying, so changes can have an immediate reflection on the application
 
 4. ```npm run test```: This command is actually consists of 5 parts:
-    1. ```db-migrate db:create storetest```: creating a testing db called `storetest`
-    2. ```set ENV=test```: changing the environment variable to `test` instead of `dev`
-    3. ```db-migrate --env test up```: running the db migrations on the testing database
-    4. ```jasmine-ts```: running the tests on the endpoints
-    5. ```db-migrate db:drop storetest```: deleting the testing the database, so if you ran this test script many times no overlap happens
+    1. ```tsc```: building the application in the dist folder to run the tests on it
+    2. ```db-migrate db:create storetest```: creating a testing db called `storetest`
+    3. ```set ENV=test```: changing the environment variable to `test` instead of `dev`
+    4. ```db-migrate --env test up```: running the db migrations on the testing database
+    5. ```jasmine-ts```: running the tests on the endpoints
+    6. ```db-migrate db:drop storetest```: deleting the testing the database, so if you ran this test script many times no overlap happens
 
 5. ```npm run tsc```: This command will build your project in `./dist` folder in the ROOT directory
