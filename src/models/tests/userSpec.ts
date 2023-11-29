@@ -1,54 +1,48 @@
-import request from "supertest";
-import app from "../../server";
+import { User, UserServices } from "../user";
 
-export const mockUser = {
-  first_name: "Test",
-  last_name: "User",
-  password: "password123",
+type loginResponse = {
+  accessToken: string;
 };
 
-describe("User Endpoints", () => {
+describe("User model", () => {
+  const userService = new UserServices();
+  let userId: number;
   it("should create a new user", async () => {
-    const response = await request(app).post("/signup").send(mockUser);
-
-    expect(response.status).toBe(200);
-    expect(response.body.first_name).toBe(mockUser.first_name);
+    const user: User = (await userService.createUser({
+      first_name: "Hossam",
+      last_name: "Ali",
+      password: "password123",
+    })) as User;
+    userId = user.id as number;
+    expect(user.first_name).toBe("Hossam");
+    expect(user.last_name).toBe("Ali");
   });
 
-  it("should log in and return a token", async () => {
-    const response = await request(app).post("/login").send({
-      username: mockUser.first_name,
-      password: mockUser.password,
-    });
-
-    expect(response.status).toBe(200);
-    expect(response.body.accessToken).toBeTruthy();
+  it("should get that the password is wrong", async () => {
+    const res: object = await userService.loginUser("Hossam", "wrongpassword");
+    expect(res).toEqual({ error: "Invalid password!" });
   });
 
-  it("should show an authentication error", async () => {
-    // For Authentication testing
-    const response = await request(app).get("/users");
-    expect(response.body).toEqual({ error: "No accessToken provided!" });
+  it("should login the user and give an accessToken", async () => {
+    const res: loginResponse = (await userService.loginUser(
+      "Hossam",
+      "password123",
+    )) as loginResponse;
+    expect(res.accessToken).toBeTruthy();
+  });
+
+  it("should get all users", async () => {
+    const res: User[] = (await userService.getAllUsers()) as User[];
+    expect(res.length).toBeGreaterThan(0);
   });
 
   it("should get a specific user by ID", async () => {
-    const loginResponse = await request(app).post("/login").send({
-      username: mockUser.first_name,
-      password: mockUser.password,
-    });
-    const accessToken = loginResponse.body.accessToken;
-    const response = await request(app)
-      .get("/users/1")
-      .set("accessToken", accessToken);
-
-    expect(response.status).toBe(200);
-    expect(response.body.id).toBe(1);
+    const res: User = (await userService.getUserById(userId)) as User;
+    expect(res.first_name).toBe("Hossam");
   });
 
   it("should delete a user by ID", async () => {
-    const response = await request(app).delete("/users/1");
-
-    expect(response.status).toBe(200);
-    expect(response.body.id).toBe(1);
+    const res: User = (await userService.deleteUser(userId)) as User;
+    expect(res.first_name).toBe("Hossam");
   });
 });

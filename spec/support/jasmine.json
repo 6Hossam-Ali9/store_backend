@@ -1,9 +1,12 @@
 {
   "spec_dir": "spec",
   "spec_files": [
-    "../**/tests/userSpec.ts",
-    "../**/tests/productSpec.ts",
-    "../**/tests/orderSpec.ts"
+    "../**/tests/usersSpec.js",
+    "../**/tests/productsSpec.js",
+    "../**/tests/ordersSpec.js",
+    "../**/tests/userSpec.js",
+    "../**/tests/productSpec.js",
+    "../**/tests/orderSpec.js"
   ],
   "helpers": [
     "helpers/**/*.js"

@@ -34,23 +34,39 @@ type OrderResponse = {
 };
 
 const index = async (req: Request, res: Response) => {
-  const orders = await ord.getAllOrders();
-  res.json(orders);
+  try {
+    const orders = await ord.getAllOrders();
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
 };
 
 const create = async (req: Request, res: Response) => {
-  const order = await ord.createOrder(req.body);
-  res.json(order);
+  try {
+    const order = await ord.createOrder(req.body);
+    res.json(order);
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
 };
 
 const show = async (req: Request, res: Response) => {
-  const order = await ord.getOrderById(parseInt(req.params.id));
-  res.json(order);
+  try {
+    const order = await ord.getOrderById(parseInt(req.params.id));
+    res.json(order);
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
 };
 
 const del = async (req: Request, res: Response) => {
-  const order = await ord.deleteOrder(parseInt(req.params.id));
-  res.json(order);
+  try {
+    const order = await ord.deleteOrder(parseInt(req.params.id));
+    res.json(order);
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
 };
 
 //extra service methods

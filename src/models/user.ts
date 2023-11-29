@@ -3,7 +3,7 @@ import client from "../database";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 export type User = {
-  id: number;
+  id?: number;
   first_name: string;
   last_name: string;
   password: string;
@@ -33,10 +33,7 @@ export class UserServices {
     }
   }
 
-  public async loginUser(
-    username: string,
-    password: string,
-  ): Promise<object | string> {
+  public async loginUser(username: string, password: string): Promise<object> {
     try {
       const conn = await client.connect();
       const sql = "SELECT * FROM users WHERE first_name = $1";

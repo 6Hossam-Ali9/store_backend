@@ -5,29 +5,49 @@ import validateToken from "../middlewares/Auth";
 const dev = new UserServices();
 
 const index = async (_req: Request, res: Response) => {
-  const users = await dev.getAllUsers();
-  res.json(users);
+  try {
+    const users = await dev.getAllUsers();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
 };
 
 const create = async (req: Request, res: Response) => {
-  const user = await dev.createUser(req.body);
-  res.json(user);
+  try {
+    const user = await dev.createUser(req.body);
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
 };
 
 const login = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
-  const token = await dev.loginUser(username, password);
-  res.json(token);
+  try {
+    const { username, password } = req.body;
+    const token = await dev.loginUser(username, password);
+    res.json(token);
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
 };
 
 const show = async (req: Request, res: Response) => {
-  const user = await dev.getUserById(parseInt(req.params.id));
-  res.json(user);
+  try {
+    const user = await dev.getUserById(parseInt(req.params.id));
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
 };
 
 const del = async (req: Request, res: Response) => {
-  const user = await dev.deleteUser(parseInt(req.params.id));
-  res.json(user);
+  try {
+    const user = await dev.deleteUser(parseInt(req.params.id));
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
 };
 
 const usersRoutes = (app: express.Application) => {
